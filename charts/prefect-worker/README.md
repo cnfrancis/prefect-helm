@@ -336,7 +336,7 @@ worker:
 | worker.cloudApiConfig.workspaceId | string | `""` | prefect workspace ID |
 | worker.clusterUid | string | `""` | unique cluster identifier, if none is provided this value will be inferred at time of helm install |
 | worker.command | list | `[]` | Custom container entrypoint |
-| worker.config.baseJobTemplate.configuration | string | `nil` | JSON formatted base job template. If data is provided here, the chart will generate a configmap and mount it to the worker pod |
+| worker.config.baseJobTemplate.configuration | string | `nil` | If data is provided here, the chart will generate a configmap and mount it to the worker pod. |
 | worker.config.baseJobTemplate.existingConfigMapName | string | `""` | the name of an existing ConfigMap containing a base job template. NOTE - the key must be 'baseJobTemplate.json' |
 | worker.config.http2 | bool | `true` | connect using HTTP/2 if the server supports it (experimental) |
 | worker.config.installPolicy | string | `"prompt"` | install policy to use workers from Prefect integration packages. |

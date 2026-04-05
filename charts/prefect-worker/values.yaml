@@ -123,7 +123,7 @@ worker:
     observerClusterWide: false
 
     ##  If unspecified, Prefect will use the default base job template for the given worker type. If the work pool already exists, this will be ignored.
-    ## e.g.:
+    ## e.g. (raw JSON string — legacy, still supported):
     ## baseJobTemplate:
     ##   configuration: |
     ##    {
@@ -134,13 +134,29 @@ worker:
     ##        ...
     ##      }
     ##    }
+    ## e.g. (YAML dict — supports embedded Helm template expressions evaluated via tpl):
+    ## baseJobTemplate:
+    ##   configuration:
+    ##     job_configuration:
+    ##       namespace: '{{ .Values.targetNamespace }}'
+    ##       job_manifest:
+    ##         apiVersion: batch/v1
+    ##         kind: Job
+    ##         # ...
+    ##     variables:
+    ##       type: object
+    ##       properties:
+    ##         image:
+    ##           type: string
     ## OR
     ## baseJobTemplate:
     ##   existingConfigMapName: "my-existing-config-map"
     baseJobTemplate:
       # -- the name of an existing ConfigMap containing a base job template. NOTE - the key must be 'baseJobTemplate.json'
       existingConfigMapName: ""
-      # -- JSON formatted base job template. If data is provided here, the chart will generate a configmap and mount it to the worker pod
+      # -- base job template as a raw JSON string or a YAML dict. When given as a dict, Helm template
+      # -- expressions embedded in values are evaluated via tpl before the result is serialised to JSON.
+      # -- If data is provided here, the chart will generate a configmap and mount it to the worker pod.
       configuration: null
       # -- optionally override the default name of the generated configmap
       # name: ""

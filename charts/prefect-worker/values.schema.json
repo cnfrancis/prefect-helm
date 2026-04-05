@@ -303,7 +303,7 @@
                 "existingConfigMapName": {
                   "type": "string",
                   "title": "Existing ConfigMap Name",
-                  "description": "the name of an existing ConfigMap containing a base job template. NOTE - the key must be 'baseJobTemplate.json'"
+                  "description": "th name of an existing ConfigMap containing a base job template. NOTE - the key must be 'baseJobTemplate.json'"
                 },
                 "configuration": {
                   "type": ["string", "null"],
